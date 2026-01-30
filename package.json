@@ -1,0 +1,24 @@
+{
+  "name": "ai-chatbot",
+  "version": "1.0.0",
+  "description": "AI Chatbot - Vue3 + Koa full-stack application",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:client & npm run dev:server",
+    "dev:client": "npm run dev --workspace=packages/client",
+    "dev:server": "npm run dev --workspace=packages/server",
+    "build": "npm run build --workspace=packages/client",
+    "start": "npm run start --workspace=packages/server"
+  },
+  "keywords": [
+    "ai",
+    "chatbot",
+    "vue3",
+    "koa"
+  ],
+  "author": "",
+  "license": "MIT"
+}
