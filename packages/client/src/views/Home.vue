@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import ChatBubble from '@/components/ChatBubble.vue'
 import { useChatStore } from '@/store/chat'
 
 const chatStore = useChatStore()
 const inputMessage = ref('')
+
+onMounted(() => {
+  chatStore.loadHistory()
+})
 
 const sendMessage = async () => {
   if (!inputMessage.value.trim()) return

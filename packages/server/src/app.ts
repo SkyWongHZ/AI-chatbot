@@ -5,6 +5,7 @@ import cors from 'koa-cors'
 import { config } from './config'
 import router from './routes'
 import { errorHandler } from './middlewares/errorHandler'
+import prisma from './db/prisma'
 
 const app = new Koa()
 
@@ -21,8 +22,20 @@ app.use(router.allowedMethods())
 // 启动服务器
 const PORT = config.port
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
-})
+async function start() {
+  try {
+    await prisma.$connect()
+    console.log('Database connected')
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`)
+    })
+  } catch (error) {
+    console.error('Failed to connect to database:', error)
+    process.exit(1)
+  }
+}
+
+start()
 
 export default app
